@@ -8,7 +8,7 @@ pipeline {
         TARGET_USER   = 'ubuntu'
         TARGET_IP     = '172.31.20.47'
 
-        TARGET_PATH   = '/var/www/html/'
+        TARGET_PATH   = '/var/www/html/shop'
 
         SSH_CRED_ID   = 'linux'
     }
@@ -24,12 +24,16 @@ pipeline {
             }
         }
 
-        stage('Copy Files to Target Server') {
+        stage('Deploy Website Files') {
             steps {
                 sshagent(credentials: ["${SSH_CRED_ID}"]) {
                     sh """
-                        scp -o StrictHostKeyChecking=no \
-                        -r * \
+                        # Create target directory if it does not exist
+                        ssh -o StrictHostKeyChecking=no ${TARGET_USER}@${TARGET_IP} \
+                        'sudo mkdir -p ${TARGET_PATH}'
+
+                        # Copy website files
+                        scp -o StrictHostKeyChecking=no -r * \
                         ${TARGET_USER}@${TARGET_IP}:${TARGET_PATH}/
                     """
                 }
