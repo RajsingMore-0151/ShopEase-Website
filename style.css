@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+nav {
+    background: #1f1f1f;
+    padding: 15px;
+}
+
+nav a {
+    color: #00bfff;
+    margin: 20px;
+    text-decoration: none;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #00bfff;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
